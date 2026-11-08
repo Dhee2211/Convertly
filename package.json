@@ -1,0 +1,13 @@
+{
+  "name": "convertly",
+  "version": "0.1.0",
+  "description": "Every converter and calculator in one search box",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "start": "python3 -m http.server 8000",
+    "build": "node scripts/build.mjs",
+    "test": "node --test test/units.test.mjs test/calc.test.mjs test/parse.test.mjs test/tz.test.mjs"
+  }
+}

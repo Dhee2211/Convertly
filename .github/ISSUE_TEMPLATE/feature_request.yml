@@ -1,0 +1,17 @@
+name: Feature request
+description: Suggest a converter, calculator or improvement
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like?
+      description: Which converter or calculator is missing? Example inputs help (e.g. "5 stone to kg").
+    validations:
+      required: true
+  - type: checkboxes
+    id: help
+    attributes:
+      label: Contributing
+      options:
+        - label: I'm willing to open a PR for this
