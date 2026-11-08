@@ -1,7 +1,7 @@
 // Page shell: the search box that understands plain-English queries, and mounting the page's tool.
 import { h, clear, resultRow, plain, debounce } from "./ui.js";
 import { parseQuery } from "./parse.js";
-import { convert, convertAll, formatNumber, hasCurrencyRates } from "./units.js";
+import { convert, convertAll, formatNumber, hasCurrencyRates, POPULAR_CURRENCIES } from "./units.js";
 import { discount, percentOf, whatPercent, percentChange, tip, toRoman, convertBase, hexToRgb, rgbToHex, rgbToHsl } from "./calc.js";
 import { convertClock, zoneLabel, formatTime, formatDay, zoneAbbr, offsetLabel, zonedToInstant, partsIn, localZone } from "./tz.js";
 import { loadRates } from "./currency.js";
@@ -16,7 +16,7 @@ const href = (slug, params = {}) => {
 };
 const slugOf = (id) => toolById(id).slug;
 /** Prefer conversions whose results are a comfortable size to read (not 0.000001 or 5,000,000,000). */
-const relevant = (rows) => [...rows].sort((a, b) => Math.abs(Math.log10(Math.abs(a.value) || 1e-9) - 1.5) - Math.abs(Math.log10(Math.abs(b.value) || 1e-9) - 1.5));
+const relevant = (rows) => (rows.length > 30 ? rows.filter((r) => POPULAR_CURRENCIES.includes(r.unit.id)) : [...rows]).sort((a, b) => Math.abs(Math.log10(Math.abs(a.value) || 1e-9) - 1.5) - Math.abs(Math.log10(Math.abs(b.value) || 1e-9) - 1.5));
 
 // ------------------------------------------------------------------ search box
 const input = document.getElementById("q");
